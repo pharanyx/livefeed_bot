@@ -1,0 +1,38 @@
+package bot_reactions
+
+import (
+	"strings"
+
+	"github.com/bwmarrin/discordgo"
+)
+
+type Ping struct {
+	Trigger string
+}
+
+func (p *Ping) Help() string {
+	return "Will return data from the ashop database for each search term."
+}
+
+func (p *Ping) HelpDetail(m *discordgo.Message) string {
+	return p.Help()
+}
+
+func (p *Ping) Reaction(m *discordgo.Message, a *discordgo.Member, update bool) string {
+	if strings.Contains(strings.ToLower(m.Content), "ashop") {
+		return "Coming soon..."
+	}
+	return "Coming soon..."
+}
+
+func init() {
+	ping := &Ping{
+		Trigger: "ashop",
+	}
+	addReaction(ping.Trigger, ping)
+
+	pong := &Ping{
+		Trigger: "ashelp",
+	}
+	addReaction(pong.Trigger, pong)
+}
